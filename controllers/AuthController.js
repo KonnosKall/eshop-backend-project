@@ -115,7 +115,9 @@ const register = async (req, res) => {
                 message: "User Not created"
             });
         });
-}
+};
+
+
 
 module.exports = {
     adminLogin,

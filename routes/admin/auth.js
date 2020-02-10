@@ -4,5 +4,6 @@ const AuthController = require("../../controllers/AuthController");
 const AuthValidator = require("../../validators/AuthValidator");
 
 route.post("/login", AuthValidator.login, AuthController.adminLogin);
+route.post("/login", AuthValidator.login, AuthController.adminLogin);
 
 module.exports = route;
