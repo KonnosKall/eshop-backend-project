@@ -1,6 +1,7 @@
 const express = require("express");
 const route = express.Router();
 const AdminAuth = require("../../middlewares/adminAuth");
+const StatsController = require("../../controllers/StatsController");
 
 route.get("/", AdminAuth, (req, res) => {
     res.json({
@@ -8,7 +9,7 @@ route.get("/", AdminAuth, (req, res) => {
         message: "Admin Area"
     });
 });
-route.get("/stats", AdminAuth, );
+route.get("/stats", AdminAuth, StatsController.dashboardStats);
 route.use("/auth", require("./auth"));
 route.use("/users", AdminAuth, require("./users"));
 route.use("/products", AdminAuth, require("./products"));

@@ -24,14 +24,14 @@ const AdminAuth = async (req, res, next) => {
     const user = await User
         .findById(decodedUser._id)
         .exec();
-    
+
     if (!user || user.role != "admin") {
         return res.json({
             success: false,
             message: "Forbidden"
         });
     }
-
+    req.user = user;
     next();
 };
 

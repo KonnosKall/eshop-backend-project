@@ -7,9 +7,9 @@ const adminLogin = async (req, res) => {
             role: "admin"
         })
         .exec();
-    
+
     // If there is no user with this email
-    if(user === null) {
+    if (user === null) {
         return res.json({
             success: false,
             message: "Wrong credentials"
@@ -25,7 +25,7 @@ const adminLogin = async (req, res) => {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email
-            }, 
+            },
             process.env.JWT_SECRET,
             {expiresIn: process.env.JWT_EXPIRES_IN}
         );
@@ -53,9 +53,9 @@ const login = async (req, res) => {
     const user = await User
         .findOne({email: req.body.email})
         .exec();
-    
+
     // If there is no user with this email
-    if(user === null) {
+    if (user === null) {
         return res.json({
             success: false,
             message: "Wrong credentials"
@@ -71,7 +71,7 @@ const login = async (req, res) => {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email
-            }, 
+            },
             process.env.JWT_SECRET,
             {expiresIn: process.env.JWT_EXPIRES_IN}
         );
@@ -117,10 +117,24 @@ const register = async (req, res) => {
         });
 };
 
+const checkToken = async (req, res) => {
+        res.json({
+                success: true,
+                user: {
+                    _id: req.user._id,
+                    firstName: req.user.firstName,
+                    lastName: req.user.lastName,
+                    email: req.user.email
+                }
+            }
+        );
 
+    }
+;
 
 module.exports = {
     adminLogin,
     login,
-    register
+    register,
+    checkToken
 };
